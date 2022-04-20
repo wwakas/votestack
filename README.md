@@ -19,14 +19,14 @@ MONITORING STACK:
 SWARMPIT STACK:  
 > *Deploy stack from file: swarmpit.yml  
 
-APP:
-> VOTE: http://localhost:5000
-> RESULT: http://localhost:5001
-GRAFANA:
-> http://localhost:3000
-PROMETHEUS:
-> http://localhost:3001
-SWARMPIT:
-> http://localhost:3003
+APP:  
+> VOTE: http://localhost:5000  
+> RESULT: http://localhost:5001  
+GRAFANA:  
+> http://localhost:3000  
+PROMETHEUS:  
+> http://localhost:3001  
+SWARMPIT:  
+> http://localhost:3003  
 
 
