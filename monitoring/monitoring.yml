@@ -1,0 +1,72 @@
+version: '3.3'
+
+services:
+  grafana:
+    image: grafana/grafana-enterprise:8.2.0
+    deploy:
+      replicas: 1
+    networks:
+    - monitoring
+    ports:
+      - 3000:3000
+    configs:
+      - source: grafana_datasource
+        target: /etc/grafana/provisioning/datasources/datasource.yaml
+      - source: grafana_ini
+        target: /etc/grafana/grafana.ini
+      - source: grafana_pwd
+        target: /password.sh
+        mode: 0555
+    entrypoint: /password.sh
+
+  prometheus:
+    image: prom/prometheus:v2.33.5
+    deploy:
+      replicas: 1
+    networks:
+    - monitoring
+    ports:
+      - 3001:9090
+    configs:
+      - source: prom_conf
+        target: /etc/prometheus/prometheus.yml
+    volumes:
+      - prom_db:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    deploy:
+      mode: global
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+
+volumes:
+  prom_db:
+
+configs:
+  prom_conf:
+    file: ./configs/prometheus/prometheus.yml
+  grafana_datasource:
+    file: ./configs/grafana/datasource.yaml
+  grafana_ini:
+    file: ./configs/grafana/grafana.ini
+  grafana_pwd:
+    file: ./configs/grafana/password.sh
