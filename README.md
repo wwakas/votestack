@@ -13,9 +13,11 @@ Manual deployment:
 APP STACK:  
 > *Build necessary images: worker(tag: dockersamples/examplevotingapp_worker) & result(tag: reworked/examplevotingapp_result)  
 > *Deploy stack from file: app.yml  
+
 MONITORING STACK:  
 > *Change default admin password in configuration files: /configs/grafana/grafana.ini (line 220) & /configs/grafana/password.sh  
 > *Deploy stack from file: monitoring.yml  
+
 SWARMPIT STACK:  
 > *Deploy stack from file: swarmpit.yml  
 
