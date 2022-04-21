@@ -18,6 +18,8 @@ services:
         target: /password.sh
         mode: 0555
     entrypoint: /password.sh
+    depends_on:
+    - prometheus
 
   prometheus:
     image: prom/prometheus:v2.33.5
@@ -38,6 +40,9 @@ services:
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
+    depends_on:
+    - node-exporter
+    - cadvisor
 
   node-exporter:
     image: prom/node-exporter:latest
@@ -54,6 +59,19 @@ services:
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
     networks:
       - monitoring
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+    - 8081:8080
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - monitoring
+
 
 networks:
   monitoring:
