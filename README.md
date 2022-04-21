@@ -11,7 +11,7 @@ Prequisites:
   
 Manual deployment:  
 APP STACK:  
-> *Build necessary images: worker(tag: dockersamples/examplevotingapp_worker) & result(tag: reworked/examplevotingapp_result)  
+> *Build necessary images: worker(tag: reworked/examplevotingapp_worker) & result(tag: reworked/examplevotingapp_result)  
 > *Deploy stack from file: app.yml  
 
 MONITORING STACK:  
