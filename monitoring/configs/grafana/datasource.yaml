@@ -14,5 +14,21 @@ datasources:
     # <string> custom UID which can be used to reference this datasource in other parts of the configuration, if not specified will be generated automatically
     #uid: my_unique_uid
     # <string> url
-    url: http://prometheus:9090
+    url: https://prometheus:9090
+    basicAuth: true
+    basicAuthUser: admin
     editable: true
+    jsonData:
+      tlsAuth: true
+      serverName: sample.com
+    secureJsonData:
+      basicAuthPassword: TEST123!
+      tlsClientCert: | 
+        -----BEGIN CERTIFICATE-----
+        -----END CERTIFICATE-----
+
+        
+      tlsClientKey: | 
+        -----BEGIN PRIVATE KEY-----
+        -----END PRIVATE KEY-----
+
