@@ -32,7 +32,7 @@ SWARMPIT:
 > http://localhost:3003  
 
 
-# how to properly deploy using ssl_enabled branch:
+HOW TO PROPERLY DEPLOY USING ssl_enabled BRANCH:
 
 > *add certificate(named server.crt) & pkey(named server.key) in: monitoring/configs/prometheus/certs  
 > *add certificate and pkey in monitoring/configs/grafana/datasource.yaml  
