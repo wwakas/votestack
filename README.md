@@ -37,3 +37,4 @@ HOW TO PROPERLY DEPLOY USING ssl_enabled BRANCH:
 > *add certificate(named server.crt) & pkey(named server.key) in: monitoring/configs/prometheus/certs  
 > *add certificate and pkey in monitoring/configs/grafana/datasource.yaml  
 > *pass valid domain name (monitoring/configs/grafana/grafana.ini) in line number 41  
+> *pass valid domain name (monitoring/configs/grafana/datasource.yaml) in line number 23  
